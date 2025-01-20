@@ -1,0 +1,7 @@
+inflection
+fastapi
+httpx
+pydantic
+pytest
+requests
+uvicorn
