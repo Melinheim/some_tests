@@ -137,11 +137,6 @@ class TestUsers:
             3 if users_len < (self.max_pagination_count * 3)
             else users_len // self.max_pagination_count + 1
         )
-        page_size_request = (
-            users_len // pages_count + 1
-            if users_len % pages_count
-            else users_len // pages_count
-        )
 
         all_ids = []
         for i in range(pages_count):
