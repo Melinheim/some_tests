@@ -1,19 +1,9 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr, HttpUrl
 
 
 class UserMainSchema(BaseModel):
     id: int
-    email: str
+    email: EmailStr
     first_name: str
     last_name: str
-    avatar: str
-
-
-class UserSupportSchema(BaseModel):
-    url: str
-    text: str
-
-
-class UserResponseSchemaGet(BaseModel):
-    data: UserMainSchema
-    support: UserSupportSchema
+    avatar: HttpUrl

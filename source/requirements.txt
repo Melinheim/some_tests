@@ -1,6 +1,9 @@
 inflection
+email-validator
 fastapi
+fastapi-pagination
 httpx
+mimesis
 pydantic
 pytest
 requests

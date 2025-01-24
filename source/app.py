@@ -2,10 +2,11 @@ from fastapi import FastAPI, HTTPException, status
 from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
-from inflection import humanize
+from fastapi_pagination import add_pagination
 
 from api.login import router as router_login
 from api.user import router as router_user
+from api.status import router as router_status
 
 app = FastAPI()
 
@@ -24,22 +25,23 @@ def http_exception_handler(request, exc: HTTPException):
 
 
 @app.exception_handler(RequestValidationError)
-def http_exception_handler(request, exc: RequestValidationError):
+def request_validation_exception_handler(request, exc: RequestValidationError):
     errors = [
-        humanize(f'{i["type"]} {l}.')
+        f'{".".join(str(l) for l in i["loc"])}: {i["msg"]}'
         for i in exc.errors()
-        for l in i['loc']
-        if l != 'body'
     ]
     error = ' '.join(errors)
     return JSONResponse(
-        status_code=status.HTTP_400_BAD_REQUEST,
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
         content=jsonable_encoder({'error': error})
     )
 
 
+app.include_router(router_status)
 app.include_router(router_user)
 app.include_router(router_login)
+
+add_pagination(app)
 
 
 if __name__ == '__main__':

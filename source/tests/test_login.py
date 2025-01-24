@@ -1,3 +1,4 @@
+from http import HTTPStatus
 from fastapi import Response
 from fastapi.testclient import TestClient
 from pytest import mark
@@ -17,7 +18,9 @@ class TestLogin:
             json=any_user_credentials
         )
 
-        assert response.status_code == 200, f'Expected status code 200, but got {response.status_code}'
+        wxpected_status = HTTPStatus.OK
+        assert response.status_code == wxpected_status, (
+            f'Expected status code {wxpected_status}, but got {response.status_code}')
 
         body = response.json()
         assert 'token' in body, 'Response body does not contain "token" key'
@@ -43,5 +46,7 @@ class TestLogin:
             json=credentials
         )
 
-        assert response.status_code == 400, f'Expected status code 400, but got {response.status_code}'
-        assert f'Missing {missing}.' == response.json()['error']
+        wxpected_status = HTTPStatus.UNPROCESSABLE_ENTITY
+        assert response.status_code == wxpected_status, (
+            f'Expected status code {wxpected_status}, but got {response.status_code}')
+        assert f'body.{missing}: Field required' == response.json()['error']

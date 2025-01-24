@@ -1,32 +1,35 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, status
+from fastapi_pagination import Page, paginate
+from mimesis import Locale, Person
 
-from schemas.user import UserResponseSchemaGet
+from schemas.user import UserMainSchema
 
 router = APIRouter(prefix='/api/users', tags=['Users API'])
 
-users = {
-    2: {
-        'id': 2,
-        'email': 'janet.weaver@reqres.in',
-        'first_name': 'Janet',
-        'last_name': 'Weaver',
-        'avatar': 'https://reqres.in/img/faces/2-image.jpg',
-    }
-}
+person = Person(Locale.EN)
 
-support_info = {
-    'url': 'https://contentcaddy.io?utm_source=reqres&utm_medium=json&utm_campaign=referral',
-    'text': 'Tired of writing endless social media content? Let Content Caddy generate it.',
-}
+users: list[UserMainSchema] = [
+    UserMainSchema(
+        id=i,
+        email=person.email(),
+        first_name=person.name(),
+        last_name=person.surname(),
+        avatar=f'https://reqres.in/img/faces/{i}-image.jpg'
+    ) for i in range(1, 116)
+]
 
 
-@router.get('/{user_id}', response_model=UserResponseSchemaGet)
-def get_user_by_id(user_id: int):
+@router.get('/{user_id}')
+def get_user_by_id(user_id: int) -> UserMainSchema:
     """Получить пользователя по user_id"""
-    user = users.get(user_id)
-    if not user:
-        raise HTTPException(status_code=404)
-    return {
-        'data': user,
-        'support': support_info,
-    }
+    if user_id < 1:
+        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail='Invalid user id')
+    try:
+        return users[user_id - 1]
+    except IndexError:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='User not found')
+
+
+@router.get('')
+def get_users() -> Page[UserMainSchema]:
+    return paginate(users)
