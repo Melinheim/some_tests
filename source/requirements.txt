@@ -2,8 +2,11 @@ inflection
 email-validator
 fastapi
 fastapi-pagination
+isort
 httpx
 mimesis
+pycodestyle
+pylint
 pydantic
 pytest
 requests

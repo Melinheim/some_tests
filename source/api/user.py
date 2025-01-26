@@ -23,13 +23,16 @@ users: list[UserMainSchema] = [
 def get_user_by_id(user_id: int) -> UserMainSchema:
     """Получить пользователя по user_id"""
     if user_id < 1:
-        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail='Invalid user id')
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail='Invalid user id')
     try:
         return users[user_id - 1]
-    except IndexError:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='User not found')
+    except IndexError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail='User not found') from exc
 
 
 @router.get('')
 def get_users() -> Page[UserMainSchema]:
+    """Получить всех пользователей"""
     return paginate(users)

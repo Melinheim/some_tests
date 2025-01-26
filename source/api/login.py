@@ -16,5 +16,5 @@ def post_login(login_data: LoginSchema):
         if login_data.password == login_info_db[login_data.email]:
             return LoginResponseSchema(token='QpwL5tke4Pnpja7X4')
         raise HTTPException(status_code=401)
-    except KeyError:
-        raise HTTPException(status_code=404)
+    except KeyError as exc:
+        raise HTTPException(status_code=404) from exc
