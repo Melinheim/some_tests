@@ -1,10 +1,6 @@
 from http import HTTPStatus
-from fastapi import Response
 from fastapi.testclient import TestClient
-from pytest import mark
-from api.user import users
-from schemas.status import StatusSchema
-from schemas.user import UserMainSchema
+from models.status import StatusSchema
 
 
 def test_smoke(client: TestClient):

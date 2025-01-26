@@ -1,6 +1,6 @@
 from fastapi import APIRouter, status
 
-from schemas.status import StatusSchema
+from models.status import StatusSchema
 
 router = APIRouter(prefix='/status', tags=['Status API'])
 

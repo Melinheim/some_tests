@@ -4,7 +4,11 @@ fastapi
 fastapi-pagination
 httpx
 mimesis
+psycopg2-binary
 pydantic
 pytest
+python-dotenv
+sqlalchemy
+sqlmodel
 requests
 uvicorn

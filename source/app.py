@@ -3,10 +3,14 @@ from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from fastapi_pagination import add_pagination
+from dotenv import load_dotenv
 
-from api.login import router as router_login
-from api.user import router as router_user
-from api.status import router as router_status
+load_dotenv()
+
+from database._engine import db_init
+from routes.login import router as router_login
+from routes.user import router as router_user
+from routes.status import router as router_status
 
 app = FastAPI()
 
@@ -45,5 +49,6 @@ add_pagination(app)
 
 
 if __name__ == '__main__':
+    db_init()
     import uvicorn
     uvicorn.run(app)

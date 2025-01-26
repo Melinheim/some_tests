@@ -2,8 +2,8 @@ from http import HTTPStatus
 from fastapi import Response
 from fastapi.testclient import TestClient
 from pytest import mark
-from api.user import users
-from schemas.user import UserMainSchema
+from routes.user import users
+from models.user import UserMainSchema
 
 
 class TestUser:
