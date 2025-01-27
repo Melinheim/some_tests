@@ -1,13 +1,14 @@
+# pylint: disable=wrong-import-position
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi_pagination import add_pagination
-from dotenv import load_dotenv
 
 load_dotenv()
 
 from database._engine import db_init
 from routes.login import router as router_login
-from routes.user import router as router_user
 from routes.status import router as router_status
+from routes.user import router as router_user
 
 app = FastAPI()
 

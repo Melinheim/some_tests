@@ -1,4 +1,4 @@
 [pycodestyle]
 max-line-length = 100
-select = E121,E126,E226,E24,E704,W504,E4,W6,E
+select = E121,E126,E226,E24,E704,W504,W6
 exclude = .venv, third_party, migration

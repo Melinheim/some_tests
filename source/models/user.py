@@ -1,8 +1,9 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, HttpUrl
 from sqlmodel import Field, SQLModel
 
 
-class UserMainSchema(SQLModel, table=True):
+class UserModel(SQLModel, table=True):
+    __tablename__ = 'users'
     id: int | None = Field(default=None, primary_key=True)
     email: EmailStr
     first_name: str
@@ -10,8 +11,22 @@ class UserMainSchema(SQLModel, table=True):
     avatar: str
 
 
-class ListUserMainPaginationSchema(BaseModel):
-    items: list[UserMainSchema]
+class UserCreateModel(BaseModel):
+    email: EmailStr
+    first_name: str
+    last_name: str
+    avatar: HttpUrl
+
+
+class UserUpdateModel(BaseModel):
+    email: EmailStr | None = None
+    first_name: str | None = None
+    last_name: str | None = None
+    avatar: str | None = None
+
+
+class ListUserPaginationModel(BaseModel):
+    items: list[UserModel]
     total: int
     page: int
     size: int
