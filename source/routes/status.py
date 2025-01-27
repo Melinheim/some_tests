@@ -1,5 +1,6 @@
 from fastapi import APIRouter, status
 
+from database._engine import check_availability
 from models.status import StatusSchema
 
 router = APIRouter(prefix='/status', tags=['Status API'])
@@ -12,4 +13,4 @@ router = APIRouter(prefix='/status', tags=['Status API'])
 )
 def status_check() -> StatusSchema:
     """Status check"""
-    return StatusSchema(status='serving')
+    return StatusSchema(database=check_availability())

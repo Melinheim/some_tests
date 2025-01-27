@@ -1,3 +1,4 @@
+import logging
 import os
 
 from sqlalchemy.orm import Session
@@ -11,4 +12,16 @@ engine = create_engine(
 
 
 def db_init():
+    """Инициализация БД"""
     SQLModel.metadata.create_all(engine)
+
+
+def check_availability() -> bool:
+    """Проверка доступности БД"""
+    try:
+        with Session(engine) as session:
+            session.execute(text('SELECT 1'))
+        return True
+    except Exception as e:
+        print(e)
+        return False

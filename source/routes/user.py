@@ -34,4 +34,5 @@ def get_user_by_id(user_id: int) -> UserMainSchema:
 
 @router.get('')
 def get_users() -> Page[UserMainSchema]:
+    """Получить всех пользователей"""
     return paginate(get_users_db())

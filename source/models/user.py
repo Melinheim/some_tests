@@ -1,4 +1,4 @@
-from pydantic import EmailStr
+from pydantic import BaseModel, EmailStr
 from sqlmodel import Field, SQLModel
 
 
@@ -8,3 +8,11 @@ class UserMainSchema(SQLModel, table=True):
     first_name: str
     last_name: str
     avatar: str
+
+
+class ListUserMainPaginationSchema(BaseModel):
+    items: list[UserMainSchema]
+    total: int
+    page: int
+    size: int
+    pages: int

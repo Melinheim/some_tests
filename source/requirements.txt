@@ -2,9 +2,12 @@ inflection
 email-validator
 fastapi
 fastapi-pagination
+isort
 httpx
 mimesis
 psycopg2-binary
+pycodestyle
+pylint
 pydantic
 pytest
 python-dotenv

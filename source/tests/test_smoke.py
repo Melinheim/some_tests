@@ -8,7 +8,5 @@ def test_smoke(client: TestClient):
 
     response = client.get(url='/status')
 
-    status_code_expected = HTTPStatus.OK
-    assert response.status_code == status_code_expected, (
-        f'Expected status code {status_code_expected}, but got {response.status_code}')
+    assert response.status_code == HTTPStatus.OK
     StatusSchema.model_validate(response.json())
