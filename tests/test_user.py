@@ -4,7 +4,7 @@ from fastapi import Response
 from fastapi.testclient import TestClient
 from pytest import mark
 
-from models.user import ListUserPaginationModel, UserModel, UserUpdateModel
+from app.models.user import ListUserPaginationModel, UserModel, UserUpdateModel
 
 
 class TestGetUsersId:

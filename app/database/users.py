@@ -7,8 +7,8 @@ from fastapi_pagination.ext.sqlmodel import paginate
 from sqlalchemy.orm.exc import UnmappedInstanceError
 from sqlmodel import Session, select
 
-from database._engine import engine
-from models.user import UserModel
+from app.database._engine import engine
+from app.models.user import UserModel
 
 
 def get_user(user_id: int) -> UserModel | None:

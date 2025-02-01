@@ -1,7 +1,7 @@
 from fastapi import APIRouter, status
 
-from database._engine import check_availability
-from models.status import StatusSchema
+from app.database._engine import check_availability
+from app.models.status import StatusSchema
 
 router = APIRouter(prefix='/status', tags=['Status API'])
 

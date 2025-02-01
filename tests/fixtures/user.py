@@ -8,7 +8,7 @@ from fastapi.testclient import TestClient
 from mimesis import Locale, Person
 from pytest import fixture
 
-from models.user import UserCreateModel, UserModel
+from app.models.user import UserCreateModel, UserModel
 
 
 def generate_user() -> UserCreateModel:

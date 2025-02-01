@@ -2,7 +2,7 @@ from http import HTTPStatus
 
 from fastapi.testclient import TestClient
 
-from models.status import StatusSchema
+from app.models.status import StatusSchema
 
 
 def test_smoke(client: TestClient):

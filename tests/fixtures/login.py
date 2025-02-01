@@ -1,6 +1,6 @@
 from pytest import fixture
 
-from routes.login import login_info_db
+from app.routes.login import login_info_db
 
 
 @fixture

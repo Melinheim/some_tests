@@ -3,10 +3,10 @@ from http import HTTPStatus
 from fastapi import APIRouter, HTTPException, status
 from fastapi_pagination import Page
 
-from database import users
-from database.users import get_user as get_user_db
-from database.users import get_users_paginated
-from models.user import UserCreateModel, UserModel, UserUpdateModel
+from app.database import users
+from app.database.users import get_user as get_user_db
+from app.database.users import get_users_paginated
+from app.models.user import UserCreateModel, UserModel, UserUpdateModel
 
 router = APIRouter(prefix='/api/users', tags=['Users API'])
 

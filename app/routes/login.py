@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 
-from models.login import LoginResponseSchema, LoginSchema
+from app.models.login import LoginResponseSchema, LoginSchema
 
 router = APIRouter(prefix='/api/login', tags=['Login API'])
 

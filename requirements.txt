@@ -1,6 +1,6 @@
 inflection
 email-validator
-fastapi
+fastapi[standard]
 fastapi-pagination
 isort
 httpx
