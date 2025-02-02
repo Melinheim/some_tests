@@ -1,12 +1,10 @@
 
 on:
-  pull_request:
-    branches:
-      - main
+  workflow_call:
 
 jobs:
   tests:
-    name: Test app
+    name: Tests
     runs-on: ubuntu-latest
     env:
       POSTGRES_USER: ci
@@ -27,7 +25,7 @@ jobs:
       - run: docker compose logs app
         if: always()
 
-      - name: Surface failing tests
+      - name: Test results
         if: always()
         uses: pmeier/pytest-results-action@main
         with:
